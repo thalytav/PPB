@@ -41,6 +41,7 @@ sealed class Screen(val route: String) {
     object AddTransaction : Screen("add_transaction")
     object Reward : Screen("reward")
     object Profile : Screen("profile")
+    object EditProfile : Screen("edit_profile")
 }
 
 @Composable
@@ -132,11 +133,19 @@ fun KopiKuApp(viewModel: KopiKuViewModel = viewModel(factory = AppViewModelProvi
                 ProfileScreen(
                     viewModel = viewModel,
                     onBackClick = { navController.popBackStack() },
+                    onEditClick = { navController.navigate(Screen.EditProfile.route) },
                     onLogout = {
                         navController.navigate(Screen.AddMember.route) {
                             popUpTo(0) { inclusive = true }
                         }
                     }
+                )
+            }
+            composable(Screen.EditProfile.route) {
+                EditProfileScreen(
+                    viewModel = viewModel,
+                    onBackClick = { navController.popBackStack() },
+                    onSuccess = { navController.popBackStack() }
                 )
             }
         }

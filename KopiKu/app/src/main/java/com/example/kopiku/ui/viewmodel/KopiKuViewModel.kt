@@ -30,6 +30,13 @@ class KopiKuViewModel(private val repository: KopiKuRepository) : ViewModel() {
         }
     }
 
+    fun updateMember(name: String, email: String, phone: String) {
+        val user = currentUser.value ?: return
+        viewModelScope.launch {
+            repository.updateMember(user.copy(name = name, email = email, phone = phone))
+        }
+    }
+
     fun addTransaction(amount: Double) {
         val user = currentUser.value ?: return
         viewModelScope.launch {

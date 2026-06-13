@@ -27,6 +27,7 @@ import com.example.kopiku.ui.viewmodel.KopiKuViewModel
 fun ProfileScreen(
     viewModel: KopiKuViewModel,
     onBackClick: () -> Unit,
+    onEditClick: () -> Unit,
     onLogout: () -> Unit
 ) {
     val member by viewModel.currentUser.collectAsState()
@@ -102,7 +103,7 @@ fun ProfileScreen(
                     ProfileMenuItem(
                         title = "Edit Profile",
                         icon = Icons.Default.Edit,
-                        onClick = { /* TODO */ }
+                        onClick = onEditClick
                     )
                     ProfileMenuItem(
                         title = "Logout",
